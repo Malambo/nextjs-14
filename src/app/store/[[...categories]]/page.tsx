@@ -3,14 +3,14 @@ import { getCollectionProducts, getCollections } from "app/services/shopify/coll
 import { getProducts } from "app/services/shopify/products"
 
 interface CategoryProps {
-  params: {
+  params: Promise<{
     categories: string[],
-  }
-  searchParams?: string
+  }>
+  searchParams?: Promise<string>
 }
 
 export default async function Category(props: CategoryProps) {
-  const { categories } = props.params
+  const { categories } = (await props.params)
   let products = []
   const collections = await getCollections()
   

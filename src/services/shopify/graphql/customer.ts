@@ -4,7 +4,7 @@ import { cookies } from "next/headers"
 
 
 export const getCustomerOrders = async () => {
-  const cookiesStorage = cookies()
+  const cookiesStorage = await cookies()
   const accessToken = cookiesStorage.get("accessToken")?.value || ""
   const graphqlClient = GraphQLClientSingleton.getInstance().getClient()
   const variables = {

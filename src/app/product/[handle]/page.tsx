@@ -4,12 +4,13 @@ import { redirect } from "next/navigation"
 
 
 interface ProductPageProps {
-  searchParams: {
+  searchParams: Promise<{
     id: string
-  }
+  }>
 }
 
-export async function generateMetadata({ searchParams }: ProductPageProps) { 
+export async function generateMetadata(props: ProductPageProps) {
+  const searchParams = await props.searchParams;
   const id = searchParams.id
   const products = await getProducts(id)
   const product = products[0]
@@ -24,7 +25,8 @@ export async function generateMetadata({ searchParams }: ProductPageProps) {
   }
 }
 
-export default async function ProductPage({ searchParams }: ProductPageProps) {
+export default async function ProductPage(props: ProductPageProps) {
+  const searchParams = await props.searchParams;
   const id = searchParams.id
   const products = await getProducts(id)
   const product = products[0]

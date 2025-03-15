@@ -42,7 +42,7 @@ export const handleLogin = async (formData: FormData) => {
 }
 
 export const handleCreateCart = async (items: CartItem[]) => {
-  const cookiesStore = cookies()
+  const cookiesStore = await cookies()
   const accesToken = cookiesStore.get('accessToken')?.value as string
 
   if(!accesToken) redirect('/login')

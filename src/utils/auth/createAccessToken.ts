@@ -3,7 +3,7 @@ import { customerAccessTokenCreateMutation } from "app/graphql/mutations/custome
 import { cookies } from 'next/headers'
 
 export const createAccessToken = async (email: string, password: string) => {
-  const cookiesStore = cookies()
+  const cookiesStore = await cookies()
   const graphqlClient = GraphQLClientSingleton.getInstance().getClient()
   const { customerAccessTokenCreate }: {
     customerAccessTokenCreate: {
